@@ -1,73 +1,137 @@
-# Welcome to your Lovable project
+# EcoSnap 🌿
 
-## Project info
+**An offline-first Progressive Web App for smart recycling**
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+EcoSnap helps users identify recyclable waste using on-device machine learning and a barcode-based fallback system. Track your environmental impact and earn eco-points for every item you recycle correctly!
 
-## How can I edit this code?
+## ✨ Features
 
-There are several ways of editing your application.
+- **📷 Camera Classification**: Point your camera at any item to identify its material (plastic, paper, metal, glass)
+- **🔍 Barcode Scanning**: Fallback to barcode scanning for verified product identification via Open Food Facts API
+- **🏆 Eco-Points System**: Earn points for correct classifications (+10 ML, +5 barcode)
+- **📊 Impact Dashboard**: Track your recycling stats and environmental contribution
+- **📱 PWA Support**: Install on your device, works offline
+- **🌐 Offline-First**: Core ML classification works without internet
 
-**Use Lovable**
+## 🚀 Getting Started
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+### Prerequisites
 
-Changes made via Lovable will be committed automatically to this repo.
+- Node.js 18+ or Bun
+- Modern browser with camera support
 
-**Use your preferred IDE**
+### Installation
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+```bash
+# Clone the repository
+git clone https://github.com/your-username/ecosnap.git
+cd ecosnap
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+# Install dependencies
+npm install
+# or
+bun install
 
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start development server
 npm run dev
+# or
+bun dev
 ```
 
-**Edit a file directly in GitHub**
+Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 🏗️ Architecture
 
-**Use GitHub Codespaces**
+```
+┌─────────────────────────────────────────────────────────────┐
+│                        EcoSnap PWA                          │
+├─────────────────────────────────────────────────────────────┤
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐  │
+│  │   Camera    │  │  Barcode    │  │   Points Dashboard  │  │
+│  │   Capture   │  │  Scanner    │  │   & Impact Tracker  │  │
+│  └──────┬──────┘  └──────┬──────┘  └──────────┬──────────┘  │
+│         │                │                     │             │
+│         ▼                ▼                     ▼             │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐  │
+│  │  ML Model   │  │ Open Food   │  │  IndexedDB/Local    │  │
+│  │ (Mock/TF.js)│  │ Facts API   │  │     Storage         │  │
+│  └─────────────┘  └─────────────┘  └─────────────────────┘  │
+├─────────────────────────────────────────────────────────────┤
+│                    Service Worker                           │
+│              (Caching, Offline Support)                     │
+└─────────────────────────────────────────────────────────────┘
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 📁 Project Structure
 
-## What technologies are used for this project?
+```
+src/
+├── components/
+│   ├── ui/                  # Shadcn UI components
+│   ├── BarcodeScanner.tsx   # Quagga2 barcode scanning
+│   ├── CameraCapture.tsx    # Camera access & capture
+│   ├── ClassificationDisplay.tsx  # ML results display
+│   ├── OfflineIndicator.tsx # Online/offline status
+│   ├── PointsDashboard.tsx  # User stats & impact
+│   └── PWAInstallPrompt.tsx # PWA install banner
+├── hooks/
+│   ├── useCamera.ts         # Camera access hook
+│   ├── useOnlineStatus.ts   # Network status hook
+│   └── usePWAInstall.ts     # PWA install prompt hook
+├── lib/
+│   ├── classifier.ts        # ML classification logic
+│   ├── storage.ts           # IndexedDB/localStorage
+│   └── utils.ts             # Utility functions
+├── pages/
+│   └── Index.tsx            # Main app page
+public/
+├── manifest.json            # PWA manifest
+└── sw.js                    # Service worker
+```
 
-This project is built with:
+## 🎯 Points System
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+| Action | Points |
+|--------|--------|
+| ML Classification (>70% confidence) | +10 |
+| Barcode Verification | +5 |
 
-## How can I deploy this project?
+## 🔧 Technology Stack
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+- **Frontend**: React 18 + TypeScript + Vite
+- **Styling**: Tailwind CSS + Shadcn UI
+- **Animations**: Framer Motion
+- **Storage**: IndexedDB (idb-keyval) + localStorage fallback
+- **Barcode**: Quagga.js
+- **PWA**: Service Worker + Web App Manifest
+- **API**: Open Food Facts (barcode lookup)
 
-## Can I connect a custom domain to my Lovable project?
+## 📱 PWA Installation
 
-Yes, you can!
+1. Open the app in Chrome/Safari
+2. Click "Install" when prompted, or
+3. Use browser menu → "Add to Home Screen"
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 🌍 Environmental Impact Calculations
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Based on average recycling data:
+- **CO₂ Saved**: ~0.23 kg per item
+- **Water Saved**: ~1.5 L per item
+- **Energy Saved**: ~0.1 kWh per item
+
+## 🔮 Future Enhancements
+
+- [ ] Real TensorFlow.js model integration
+- [ ] Geolocation-based recycling rules
+- [ ] Social features & leaderboards
+- [ ] Export impact reports as PDF
+- [ ] Push notifications for recycling reminders
+- [ ] Backend sync for cross-device stats
+
+## 📄 License
+
+MIT License - feel free to use for hackathons and personal projects!
+
+---
+
+Built with 💚 for the planet
