@@ -1,0 +1,87 @@
+{
+  "name": "EcoSnap - Smart Recycling Assistant",
+  "short_name": "EcoSnap",
+  "description": "Identify recyclable materials using AI and barcode scanning. Track your environmental impact.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f9f4",
+  "theme_color": "#2d8a5c",
+  "orientation": "portrait",
+  "categories": ["utilities", "lifestyle", "education"],
+  "icons": [
+    {
+      "src": "/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/scan.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Scan Item",
+      "short_name": "Scan",
+      "description": "Open camera to scan recyclable items",
+      "url": "/?action=scan",
+      "icons": [{ "src": "/icons/shortcut-scan.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "View Impact",
+      "short_name": "Impact",
+      "description": "View your recycling impact",
+      "url": "/?tab=dashboard",
+      "icons": [{ "src": "/icons/shortcut-impact.png", "sizes": "96x96" }]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}
