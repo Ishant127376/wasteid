@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Leaf, Camera, BarChart3, Info, Recycle } from 'lucide-react';
+import { Leaf, Camera, BarChart3, Info, Recycle, X, ArrowLeft } from 'lucide-react';
 import { CameraCapture } from '@/components/CameraCapture';
 import { ClassificationDisplay } from '@/components/ClassificationDisplay';
 import { BarcodeScanner } from '@/components/BarcodeScanner';
@@ -10,10 +10,25 @@ import { PWAInstallPrompt } from '@/components/PWAInstallPrompt';
 import { ClassificationResult } from '@/lib/classifier';
 import { getUserStats, addClassificationPoints, UserStats } from '@/lib/storage';
 import { toast } from 'sonner';
+import { Button } from '@/components/ui/button';
+import {
+  Navbar,
+  HeroSection,
+  ProblemSection,
+  SolutionSection,
+  FeaturesGrid,
+  TechSection,
+  ImpactPreview,
+  RewardsSection,
+  CTASection,
+  Footer,
+} from '@/components/landing';
 
+type View = 'landing' | 'app';
 type Tab = 'scan' | 'dashboard' | 'about';
 
 const Index = () => {
+  const [view, setView] = useState<View>('landing');
   const [activeTab, setActiveTab] = useState<Tab>('scan');
   const [classificationResult, setClassificationResult] = useState<ClassificationResult | null>(null);
   const [isClassifying, setIsClassifying] = useState(false);
@@ -94,12 +109,39 @@ const Index = () => {
     }
   };
 
+  const handleStartScanning = () => {
+    setView('app');
+    setActiveTab('scan');
+  };
+
   const tabs = [
     { id: 'scan' as const, label: 'Scan', icon: Camera },
     { id: 'dashboard' as const, label: 'Impact', icon: BarChart3 },
     { id: 'about' as const, label: 'About', icon: Info },
   ];
 
+  // Landing Page View
+  if (view === 'landing') {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navbar onStartScanning={handleStartScanning} />
+        <main>
+          <HeroSection onStartScanning={handleStartScanning} />
+          <ProblemSection />
+          <SolutionSection onTrySample={handleStartScanning} />
+          <FeaturesGrid />
+          <TechSection />
+          <ImpactPreview />
+          <RewardsSection />
+          <CTASection onStartScanning={handleStartScanning} />
+        </main>
+        <Footer />
+        <PWAInstallPrompt />
+      </div>
+    );
+  }
+
+  // App View
   return (
     <div className="min-h-screen bg-background pb-20">
       <OfflineIndicator />
@@ -107,11 +149,21 @@ const Index = () => {
       {/* Header */}
       <header className="sticky top-0 z-40 bg-background/80 backdrop-blur-md border-b border-border">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="p-2 rounded-xl bg-gradient-nature">
-              <Recycle className="w-6 h-6 text-primary-foreground" />
+          <div className="flex items-center gap-3">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setView('landing')}
+              className="rounded-full"
+            >
+              <ArrowLeft className="w-5 h-5" />
+            </Button>
+            <div className="flex items-center gap-2">
+              <div className="p-2 rounded-xl bg-gradient-nature">
+                <Recycle className="w-6 h-6 text-primary-foreground" />
+              </div>
+              <h1 className="text-xl font-display font-bold">EcoSnap</h1>
             </div>
-            <h1 className="text-xl font-display font-bold">EcoSnap</h1>
           </div>
           <OnlineStatusBadge />
         </div>
