@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Sparkles, ArrowRight, Download, Users } from 'lucide-react';
+import { Sparkles, ArrowRight, Download, Users, Camera } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
@@ -84,7 +84,8 @@ export const CTASection = ({ onStartScanning }: CTASectionProps) => {
               size="xl"
               className="bg-white text-eco-forest hover:bg-white/90 group"
             >
-              Start Scanning Now
+              <Camera className="w-5 h-5 mr-2" />
+              Open Camera & Scan
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
             <Button
